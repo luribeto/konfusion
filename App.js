@@ -5,10 +5,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>MAILORS te amare por siempre hasta el infinito y mas alla!!</Text>
-        <Text>TE AMO!</Text>
-        <Text>Otro TEXT</Text>
-        <Text>TEST</Text>
+        <Text>This is an REACT NATIVE APP</Text>
+        <Text>Edit App.js file</Text>
       </View>
     );
   }
@@ -17,7 +15,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
   },
