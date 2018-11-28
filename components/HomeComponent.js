@@ -9,18 +9,17 @@ function RenderItem(props) {
   const item = props.item;
   
   if (item != null) return (
-      <Card
-        featuredTitle={item.name}
-        featuredSubtitle={item.designation}
-        image={require('./images/uthappizza.png')}>
-        <Text
-            style={{margin: 10}}>
-            {item.description}</Text>
-      </Card>
-    )
+    <Card
+      featuredTitle={item.name}
+      featuredSubtitle={item.designation}
+      image={require('./images/uthappizza.png')}>
+      <Text
+          style={{margin: 10}}>
+          {item.description}</Text>
+    </Card>
+  )
 
   return(<View></View>);
-  
 }
 
 class Home extends Component {
@@ -34,7 +33,7 @@ class Home extends Component {
   }
 
   static navigationOptions = {
-      title: 'Home',
+    title: 'Home',
   }
 
   render() {
