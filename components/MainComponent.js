@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import Home from './HomeComponent';
+import React, { Component } from 'react'
+import Home from './HomeComponent'
 import About from './AboutComponent'
-import Menu from './MenuComponent';
+import Menu from './MenuComponent'
 import Contact from './ContactComponent'
-import Dishdetail from './DishdetailComponent';
-import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native';
-import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import Dishdetail from './DishdetailComponent'
+import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native'
+import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation'
+import { Icon } from 'react-native-elements'
 
 const HEADERS_CONFIG = {
   navigationOptions: ({ navigation }) => ({
@@ -157,7 +157,7 @@ class Main extends Component {
       <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight }}>
         <MainNavigator />
       </View>
-    );
+    )
   }
 }
 
@@ -185,4 +185,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Main;
+export default Main

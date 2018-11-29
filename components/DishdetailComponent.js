@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, FlatList } from 'react-native'
 import { DISHES } from '../shared/dishes'
 import { COMMENTS } from '../shared/comments'
-import { Card, Icon } from 'react-native-elements';
+import { Card, Icon } from 'react-native-elements'
 
 function RenderComments(props) {
   const comments = props.comments
@@ -30,7 +30,7 @@ function RenderComments(props) {
 }
 
 function RenderDish(props) {
-  const dish = props.dish;
+  const dish = props.dish
   
   if (dish != null) return (
       <Card
@@ -49,7 +49,7 @@ function RenderDish(props) {
       </Card>
     )
   
-  return (<View></View>);
+  return (<View></View>)
 }
 
 class Dishdetail extends Component {
@@ -68,7 +68,7 @@ class Dishdetail extends Component {
   }
 
   markFavorite(dishId) {
-    this.setState({favorites: this.state.favorites.concat(dishId)});
+    this.setState({favorites: this.state.favorites.concat(dishId)})
   } 
 
   render () {
@@ -86,4 +86,4 @@ class Dishdetail extends Component {
   }
 }
 
-export default Dishdetail;
+export default Dishdetail
