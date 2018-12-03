@@ -14,7 +14,7 @@ const HEADERS_CONFIG = {
     headerTitleStyle: { color: "#fff" },
     headerTintColor: "#fff",
     headerLeftContainerStyle: {
-      backgroundColor: '#f6b500',
+      backgroundColor: '#ffbb00',
       paddingLeft: 30
     },
     headerLeft: <Icon name="menu" size={24} 
@@ -44,7 +44,7 @@ const MenuNavigator = createStackNavigator({
   initialRouteName: 'Menu',
   navigationOptions: {
     headerStyle: {
-      backgroundColor: '#f6b500'
+      backgroundColor: '#ffbb00'
     },
     headerTitntColor: '#fff',
     headerTitleStyle: {
