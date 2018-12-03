@@ -22,14 +22,20 @@
 //   },
 // });
 
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Main from './components/MainComponent';
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import Main from './components/MainComponent'
+import { Provider } from 'react-redux'
+import { ConfigureStore } from './redux/configureStore'
+
+const store = ConfigureStore()
 
 export default class App extends React.Component {
   render() {
     return (
-      <Main style={styles.container} />
+      <Provider store={store}>
+        <Main style={styles.container} />
+      </Provider>
     );
   }
 }
@@ -41,4 +47,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
