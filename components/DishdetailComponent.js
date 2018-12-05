@@ -89,7 +89,10 @@ class Dishdetail extends Component {
 
     this.state = {
       favorites: [],
-      showModal: false
+      showModal: false,
+      author: '',
+      comment: '',
+      rating: 0
     }
   }
 
@@ -101,6 +104,20 @@ class Dishdetail extends Component {
     this.props.postFavorite(dishId)
   }
 
+  onSubmit = (dishId) => () => {
+    const comment = {
+      comment: this.state.comment,
+      author: this.state.author,
+      rating: this.state.rating,
+      dishId,
+      date: new Date().toISOString()
+    }
+
+    // this.props.addComment(comment)
+    console.log('COMMENT>>', comment)
+    this.closeModal()
+  }
+
   toggleModal = () => {
     this.setState({showModal: !this.state.showModal})
   }
@@ -109,8 +126,9 @@ class Dishdetail extends Component {
     this.setState({ showModal: false })
   }
 
-  ratingCompleted(rating) {
+  ratingCompleted = (rating) => {
     console.log("Rating is: " + rating)
+    this.setState({ rating })
   }
 
   render () {
@@ -154,6 +172,7 @@ class Dishdetail extends Component {
                       color='#686868'
                     />
                   }
+                  onChangeText={(text) => this.setState({ author: text})}
                 />
                 <Input
                   placeholder='Comment'
@@ -165,11 +184,12 @@ class Dishdetail extends Component {
                       color='#686868'
                     />
                   }
+                  onChangeText={(text) => this.setState({comment: text})}
                 />
               </View>
               <View style={styles.modalRow}>
                   <Button 
-                    onPress = { this.closeModal }
+                    onPress = { this.onSubmit(dishId) }
                     color="#ffbb00"
                     title="SUBMIT" 
                     />
