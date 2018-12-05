@@ -45,10 +45,6 @@ function RenderComments(props) {
 
 function RenderDish(props) {
 
-  // handleAddNewComment = () => {
-  //   props.toggleModal()
-  // }
-
   const dish = props.dish
   
   if (dish != null) {
@@ -67,7 +63,10 @@ function RenderDish(props) {
               name={ props.favorite ? 'heart' : 'heart-o'}
               type='font-awesome'
               color='#ffbb00'
-              onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}
+              onPress={() => {
+                if (props.favorite) return console.log('Already favorite') 
+                return props.onPress()
+              }}
               />
             <Icon
               reverse
@@ -98,12 +97,12 @@ class Dishdetail extends Component {
     title: 'Dish Details'
   }
 
-  markFavorite(dishId) {
-    this.props.postFavorite(dishId);
+  markFavorite = (dishId) => () => {
+    this.props.postFavorite(dishId)
   }
 
   toggleModal = () => {
-    this.setState({showModal: !this.state.showModal});
+    this.setState({showModal: !this.state.showModal})
   }
 
   closeModal = () => {
@@ -121,7 +120,7 @@ class Dishdetail extends Component {
       <ScrollView>
         <RenderDish dish={this.props.dishes.dishes[+dishId]}
           favorite={this.props.favorites.some(el => el === dishId)}
-          onPress={() => this.markFavorite(dishId)}
+          onPress={this.markFavorite(dishId)}
           toggleModal={ this.toggleModal }
           />
         <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />
