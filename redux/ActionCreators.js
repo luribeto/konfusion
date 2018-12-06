@@ -152,11 +152,16 @@ export const addFavorite = (dishId) => ({
     payload: dishId
 })
 
-export const postComment = (updatedComments)  => (dispatch) => {
-    dispatch(addComment(updatedComments));
+export const postComment = (dishId, rating, author, comment)  => (dispatch) => {
+    dispatch(addComment(dishId, rating, author, comment));
 }
 
-export const addComment = (updatedComments) => ({
+export const addComment = (dishId, rating, author, comment) => ({
     type: ActionTypes.ADD_COMMENT,
-    payload: updatedComments
+    payload: {
+        dishId, 
+        rating, 
+        author, 
+        comment
+    }
 })

@@ -6,7 +6,12 @@ export const comments = (state = { errMess: null, comments:[]}, action) => {
       return {...state, errMess: null, comments: action.payload};
 
     case ActionTypes.ADD_COMMENT:
-    return {...state, errMess: null, comments: action.payload};
+      const newComment = { 
+        ...action.payload, 
+        id: state.comments.length, 
+        date: new Date().toISOString() 
+      }
+      return {...state, errMess: null, comments: [...state.comments, newComment]};
 
     case ActionTypes.COMMENTS_FAILED:
       return {...state, errMess: action.payload};

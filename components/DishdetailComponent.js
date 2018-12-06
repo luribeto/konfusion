@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   postFavorite: (dishId) => dispatch(postFavorite(dishId)),
-  postComment: (updatedComments) => dispatch(postComment(updatedComments))
+  postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment))
 })
 
 function RenderComments(props) {
@@ -93,7 +93,7 @@ class Dishdetail extends Component {
       showModal: false,
       author: '',
       comment: '',
-      rating: 0
+      rating: 5
     }
   }
 
@@ -106,19 +106,11 @@ class Dishdetail extends Component {
   }
 
   handleComment = (dishId) => () => {
-    const updatedComments = [...this.props.comments.comments]
-    const id = updatedComments.length
-    const comment = {
-      id,
-      comment: this.state.comment,
-      author: this.state.author,
-      rating: this.state.rating,
-      dishId,
-      date: new Date().toISOString()
-    }
-    updatedComments.push(comment)
+    const rating = this.state.rating
+    const author = this.state.author
+    const comment = this.state.comment
 
-    this.props.postComment(updatedComments)
+    this.props.postComment(dishId, rating, author, comment)
     this.closeModal()
   }
 
@@ -156,7 +148,7 @@ class Dishdetail extends Component {
                   showRating
                   type="star"
                   fractions={1}
-                  startingValue={4}
+                  startingValue={5}
                   imageSize={40}
                   onFinishRating={this.ratingCompleted}
                   onStartRating={this.ratingStarted}
