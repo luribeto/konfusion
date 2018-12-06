@@ -153,7 +153,9 @@ export const addFavorite = (dishId) => ({
 })
 
 export const postComment = (dishId, rating, author, comment)  => (dispatch) => {
-    dispatch(addComment(dishId, rating, author, comment));
+    setTimeout(() => {
+        dispatch(addComment(dishId, rating, author, comment));
+    }, 2000)
 }
 
 export const addComment = (dishId, rating, author, comment) => ({
