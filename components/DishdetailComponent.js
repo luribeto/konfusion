@@ -4,7 +4,7 @@ import { Card, Icon, Input, Rating } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { IMAGES_MAP } from '../shared/imagesMap'
-import { postFavorite } from '../redux/ActionCreators'
+import { postFavorite, postComment } from '../redux/ActionCreators'
 
 const mapStateToProps = state => {
   return {
@@ -15,7 +15,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  postFavorite: (dishId) => dispatch(postFavorite(dishId))
+  postFavorite: (dishId) => dispatch(postFavorite(dishId)),
+  postComment: (updatedComments) => dispatch(postComment(updatedComments))
 })
 
 function RenderComments(props) {
@@ -104,17 +105,20 @@ class Dishdetail extends Component {
     this.props.postFavorite(dishId)
   }
 
-  onSubmit = (dishId) => () => {
+  handleComment = (dishId) => () => {
+    const updatedComments = [...this.props.comments.comments]
+    const id = updatedComments.length
     const comment = {
+      id,
       comment: this.state.comment,
       author: this.state.author,
       rating: this.state.rating,
       dishId,
       date: new Date().toISOString()
     }
+    updatedComments.push(comment)
 
-    // this.props.addComment(comment)
-    console.log('COMMENT>>', comment)
+    this.props.postComment(updatedComments)
     this.closeModal()
   }
 
@@ -127,7 +131,6 @@ class Dishdetail extends Component {
   }
 
   ratingCompleted = (rating) => {
-    console.log("Rating is: " + rating)
     this.setState({ rating })
   }
 
@@ -189,7 +192,7 @@ class Dishdetail extends Component {
               </View>
               <View style={styles.modalRow}>
                   <Button 
-                    onPress = { this.onSubmit(dishId) }
+                    onPress = { this.handleComment(dishId) }
                     color="#ffbb00"
                     title="SUBMIT" 
                     />
