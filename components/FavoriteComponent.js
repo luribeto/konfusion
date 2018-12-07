@@ -81,6 +81,7 @@ class Favorites extends Component {
       )
     }
     else {
+      if (this.props.favorites.length === 0) return <Text style={{margin: 20}}>No Favorites added</Text>
       return (
         <FlatList 
           data={this.props.dishes.dishes.filter(dish => this.props.favorites.some(el => el === dish.id))}
