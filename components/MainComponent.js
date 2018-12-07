@@ -10,6 +10,7 @@ import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators'
 import Reservation from './ReservationComponent'
+import Favorites from './FavoriteComponent'
 
 const mapStateToProps = state => {
   return {
@@ -87,6 +88,11 @@ const ContactNavigator = createStackNavigator({
 const ReservationNavigator = createStackNavigator({
     Reservation: { screen: Reservation }
   }, { ...HEADERS_CONFIG, initialRouteName: 'Reservation' })
+
+const FavoritesNavigator = createStackNavigator({
+  Favorites: { screen: Favorites }
+  }, { ...HEADERS_CONFIG, initialRouteName: 'Favorites' })
+
 
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
@@ -174,6 +180,21 @@ const MainNavigator = createDrawerNavigator({
       drawerIcon: ({ tintColor, focused }) => (
         <Icon
           name='cutlery'
+          type='font-awesome'            
+          size={24}
+          iconStyle={{ color: tintColor }}
+        />
+      ),
+    }
+  },
+  Favorites:
+  { screen: FavoritesNavigator,
+    navigationOptions: {
+      title: 'My Favorites',
+      drawerLabel: 'My Favorites',
+      drawerIcon: ({ tintColor, focused }) => (
+        <Icon
+          name='heart'
           type='font-awesome'            
           size={24}
           iconStyle={{ color: tintColor }}

@@ -31,7 +31,7 @@ function RenderComments(props) {
           readonly
           startingValue={item.rating}
           type="star"
-          imageSize={8}
+          imageSize={12}
           showReadOnlyText={false}
           showRating={false}
           style={styles.commentRating}
