@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { IMAGES_MAP } from '../shared/imagesMap'
 import { Loading } from './LoadingComponent'
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
   return {
@@ -20,16 +21,19 @@ class Menu extends Component {
   render() {
     const renderMenuItem = ({item, index}) => {
       const imageUri = IMAGES_MAP[item.image]
+      const duration = this.getItemDuration(index)
 
       return (
-        <Tile
-          key={index}
-          title={item.name}
-          caption={item.description}
-          featured
-          onPress={() => navigate('Dishdetail', { dishId: item.id })}
-          imageSrc={{ uri: imageUri.url }}
-        />
+        <Animatable.View animation="fadeInRightBig" duration={duration}>
+          <Tile
+            key={index}
+            title={item.name}
+            caption={item.description}
+            featured
+            onPress={() => navigate('Dishdetail', { dishId: item.id })}
+            imageSrc={{ uri: imageUri.url }}
+          />
+        </Animatable.View>
       )
     }
 
@@ -56,6 +60,12 @@ class Menu extends Component {
             />
       )
     }
+  }
+
+  getItemDuration (index) {
+    if (index === 0) return 1000
+    if (index === 1) return 1500
+    return 2000
   }
 }
 

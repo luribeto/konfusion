@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text } from 'react-native'
 import { Card } from 'react-native-elements'
+import * as Animatable from 'react-native-animatable';
 
 const TITLE = 'CONTACT INFORMATION'
 const ADDRESS = '121, Clear Water Bay Road'
@@ -17,14 +18,16 @@ class Contact extends Component {
 
   render() {
     return (
-      <Card title={TITLE}>
-        <Text>{ADDRESS}</Text>
-        <Text>{CITY}</Text>
-        <Text>{COUNTRY}</Text>
-        <Text>{TEL}</Text>
-        <Text>{FAX}</Text>
-        <Text>{EMAIL}</Text>
-      </Card>
+      <Animatable.View animation="fadeInDown" duration={1000} delay={500}>
+        <Card title={TITLE}>
+          <Text>{ADDRESS}</Text>
+          <Text>{CITY}</Text>
+          <Text>{COUNTRY}</Text>
+          <Text>{TEL}</Text>
+          <Text>{FAX}</Text>
+          <Text>{EMAIL}</Text>
+        </Card>
+      </Animatable.View>
     )
   }
 }

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { IMAGES_MAP } from '../shared/imagesMap'
 import { postFavorite, postComment } from '../redux/ActionCreators'
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
   return {
@@ -42,13 +43,15 @@ function RenderComments(props) {
   }
   
   return (
-    <Card title='Comments' >
-      <FlatList 
-        data={comments}
-        renderItem={renderCommentItem}
-        keyExtractor={item => item.id.toString()}
-        />
-    </Card>
+    <Animatable.View animation="fadeInUp" duration={1000} delay={500}>
+      <Card title='Comments' >
+        <FlatList 
+          data={comments}
+          renderItem={renderCommentItem}
+          keyExtractor={item => item.id.toString()}
+          />
+      </Card>
+    </Animatable.View>
   )
 }
 
@@ -60,32 +63,34 @@ function RenderDish(props) {
     const imageUri = IMAGES_MAP[dish.image]
 
     return (
-      <Card
-        featuredTitle={dish.name}
-        image={{ uri: imageUri.url }}>
-          <Text style={{margin: 10}}>
-              {dish.description}
-          </Text>
-          <View style={styles.iconsRow}>
-            <Icon
-              reverse
-              name={ props.favorite ? 'heart' : 'heart-o'}
-              type='font-awesome'
-              color='#ffbb00'
-              onPress={() => {
-                if (props.favorite) return console.log('Already favorite') 
-                return props.onPress()
-              }}
-              />
-            <Icon
-              reverse
-              name={ 'pencil' }
-              type='font-awesome'
-              color='#686868'
-              onPress={ props.toggleModal }
-              />
-          </View>
-      </Card>
+      <Animatable.View animation="fadeInDown" duration={1000} delay={500}>
+        <Card
+          featuredTitle={dish.name}
+          image={{ uri: imageUri.url }}>
+            <Text style={{margin: 10}}>
+                {dish.description}
+            </Text>
+            <View style={styles.iconsRow}>
+              <Icon
+                reverse
+                name={ props.favorite ? 'heart' : 'heart-o'}
+                type='font-awesome'
+                color='#ffbb00'
+                onPress={() => {
+                  if (props.favorite) return console.log('Already favorite') 
+                  return props.onPress()
+                }}
+                />
+              <Icon
+                reverse
+                name={ 'pencil' }
+                type='font-awesome'
+                color='#686868'
+                onPress={ props.toggleModal }
+                />
+            </View>
+        </Card>
+      </Animatable.View>
     )
   }
   
