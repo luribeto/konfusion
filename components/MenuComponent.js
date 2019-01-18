@@ -63,9 +63,8 @@ class Menu extends Component {
   }
 
   getItemDuration (index) {
-    if (index === 0) return 1000
-    if (index === 1) return 1500
-    return 2000
+    if (index === 0) return 500
+    return index * 1000
   }
 }
 
