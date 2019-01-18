@@ -24,7 +24,6 @@ function RenderComments(props) {
   const comments = props.comments
 
   const renderCommentItem = ({item, index}) => {
-      
     return (
       <View key={index} style={{margin: 10}}>
         <Text style={{fontSize: 14}}>{item.comment}</Text>
@@ -60,12 +59,12 @@ function RenderDish(props) {
 
   handleViewRef = ref => this.view = ref;
 
-  const recognizeRightDrag = ({ moveX, moveY, dx, dy }) => {
+  const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
     if ( dx < -200 ) return true;
     return false;
   }
 
-  const recognizeLeftDrag = ({ moveX, moveY, dx, dy }) => {
+  const recognizeComment = ({ moveX, moveY, dx, dy }) => {
     if ( dx > 200 ) return true;
     return false;
   }
@@ -80,18 +79,18 @@ function RenderDish(props) {
       },
       onPanResponderEnd: (e, gestureState) => {
           console.log("pan responder end", gestureState);
-          if (recognizeRightDrag(gestureState))
+          if (recognizeDrag(gestureState))
             Alert.alert(
               'Add Favorite',
               'Are you sure you wish to add ' + dish.name + ' to favorite?',
               [
-              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => {props.favorite ? console.log('Already favorite') : props.onPress()}},
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'OK', onPress: () => {props.favorite ? console.log('Already favorite') : props.onPress()}},
               ],
               { cancelable: false }
             );
 
-          if (recognizeLeftDrag(gestureState)) {
+          if (recognizeComment(gestureState)) {
             props.toggleModal()
           }
 
