@@ -60,8 +60,13 @@ function RenderDish(props) {
 
   handleViewRef = ref => this.view = ref;
 
-  const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
+  const recognizeRightDrag = ({ moveX, moveY, dx, dy }) => {
     if ( dx < -200 ) return true;
+    return false;
+  }
+
+  const recognizeLeftDrag = ({ moveX, moveY, dx, dy }) => {
+    if ( dx > 200 ) return true;
     return false;
   }
 
@@ -70,22 +75,25 @@ function RenderDish(props) {
           return true;
       },
       onPanResponderGrant: () => {
-        debugger
         this.view.rubberBand(1000)
         .then(endState => console.log(endState.finished ? 'finished' : 'cancelled'));
       },
       onPanResponderEnd: (e, gestureState) => {
           console.log("pan responder end", gestureState);
-          if (recognizeDrag(gestureState))
-              Alert.alert(
-                  'Add Favorite',
-                  'Are you sure you wish to add ' + dish.name + ' to favorite?',
-                  [
-                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                  {text: 'OK', onPress: () => {props.favorite ? console.log('Already favorite') : props.onPress()}},
-                  ],
-                  { cancelable: false }
-              );
+          if (recognizeRightDrag(gestureState))
+            Alert.alert(
+              'Add Favorite',
+              'Are you sure you wish to add ' + dish.name + ' to favorite?',
+              [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => {props.favorite ? console.log('Already favorite') : props.onPress()}},
+              ],
+              { cancelable: false }
+            );
+
+          if (recognizeLeftDrag(gestureState)) {
+            props.toggleModal()
+          }
 
           return true;
       }
