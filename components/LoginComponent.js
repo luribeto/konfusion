@@ -284,7 +284,7 @@ class RegisterTab extends Component {
                     <Button
                         title="Camera"
                         onPress={this.getImageFromCamera}
-                        buttonStyle={{ backgroundColor: '#d3ba64', marginTop: 30}}
+                        buttonStyle={{ backgroundColor: '#d6a603', marginTop: 30}}
                         />
                 </View>
                 <Input

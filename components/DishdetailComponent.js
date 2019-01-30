@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button, Alert, PanResponder, Share } from 'react-native';
-import { Card, Icon, Input, Rating } from 'react-native-elements'
+import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button as ButtonNative, Alert, PanResponder, Share } from 'react-native';
+import { Card, Icon, Input, Rating, Button } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { IMAGES_MAP } from '../shared/imagesMap'
@@ -258,12 +258,15 @@ class Dishdetail extends Component {
               <View style={styles.modalRow}>
                   <Button 
                     onPress = { this.handleComment(dishId) }
-                    color="#ffbb00"
+                    color="#fff"
                     title="SUBMIT" 
+                    buttonStyle={{
+                      backgroundColor: "#d6a603"
+                    }}
                     />
               </View>
               <View style={styles.modalRow}>
-                  <Button 
+                  <ButtonNative 
                     onPress = { this.closeModal }
                     color="#686868"
                     title="CLOSE" 
