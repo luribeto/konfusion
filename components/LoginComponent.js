@@ -103,6 +103,7 @@ import { Input, CheckBox, Button, Icon } from 'react-native-elements';
 import { SecureStore, Permissions, ImagePicker } from 'expo';
 import { createBottomTabNavigator } from 'react-navigation';
 import { baseUrl } from '../shared/baseUrl';
+import { IMAGES_MAP } from '../shared/imagesMap'
 
 class LoginTab extends Component {
 
@@ -216,6 +217,8 @@ class LoginTab extends Component {
 
 }
 
+const image = IMAGES_MAP['images/konfusion.png']
+
 class RegisterTab extends Component {
 
     constructor(props) {
@@ -228,7 +231,7 @@ class RegisterTab extends Component {
             lastname: '',
             email: '',
             remember: false,
-            imageUrl: baseUrl + 'images/logo.png'
+            imageUrl: image.url
         }
     }
 
@@ -281,7 +284,7 @@ class RegisterTab extends Component {
                     <Button
                         title="Camera"
                         onPress={this.getImageFromCamera}
-                        buttonStyle={{ backgroundColor: '#d3ba64'}}
+                        buttonStyle={{ backgroundColor: '#d3ba64', marginTop: 30}}
                         />
                 </View>
                 <Input
@@ -357,12 +360,14 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1,
         flexDirection: 'row',
-        margin: 20
+        marginRight: 20,
+        width: 80,
+        height: 100
     },
     image: {
       margin: 10,
       width: 80,
-      height: 60
+      height: 100
     },
     formInput: {
         margin: 20
