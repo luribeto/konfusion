@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button, Alert } fro
 import { Card } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker'
 import * as Animatable from 'react-native-animatable';
+import { Permissions, Notifications } from 'expo';
 
 class Reservation extends Component {
   constructor(props) {
@@ -28,7 +29,11 @@ class Reservation extends Component {
       alertStr,
       [
         {text: 'Cancel', onPress: () => this.resetForm(), style: 'cancel'},
-        {text: 'OK', onPress: () => this.resetForm()},
+        {text: 'OK', onPress: () => {
+            this.presentLocalNotification(this.state.date)
+            this.resetForm()
+          }
+        },
       ],
       { cancelable: false }
     );
@@ -41,11 +46,42 @@ class Reservation extends Component {
       date: ''
     })
   }
+
+  async obtainNotificationPermission() {
+    let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS);
+
+    if (permission.status !== 'granted') {
+        permission = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
+
+        if (permission.status !== 'granted') {
+            Alert.alert('Permission not granted to show notifications');
+        }
+    }
+
+    return permission;
+  }
+
+async presentLocalNotification(date) {
+    await this.obtainNotificationPermission();
+
+    Notifications.presentLocalNotificationAsync({
+        title: 'Your Reservation',
+        body: 'Reservation for '+ date + ' requested',
+        ios: {
+            sound: true
+        },
+        android: {
+            sound: true,
+            vibrate: true,
+            color: '#f6b500'
+        }
+    });
+  }
   
   render() {
     return(
       <ScrollView>
-        <Animatable.View animation="zoomIn" duration={1500} delay={500}>
+        <Animatable.View animation="zoomIn" duration={1000} delay={50}>
           <Card title='RESERVE A TABLE'>
             <View style={styles.formRow}>
             <Text style={styles.formLabel}>Number of Guests</Text>
