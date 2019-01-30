@@ -29,18 +29,33 @@ const mapDispatchToProps = dispatch => ({
   fetchLeaders: () => dispatch(fetchLeaders()),
 })
 
+// const HEADERS_CONFIG = {
+//   navigationOptions: ({ navigation }) => ({
+//     headerStyle: { backgroundColor: "#d6a603" },  
+//     headerTitleStyle: { color: "#fff" },
+//     headerTintColor: "#fff",
+//     headerLeftContainerStyle: {
+//       backgroundColor: '#ffbb00',
+//       paddingLeft: 30
+//     },
+//     headerLeft: <Icon name="menu" size={24} 
+//       color= 'white'
+//       onPress={ () => navigation.toggleDrawer() } />
+//   })
+// }
+
 const HEADERS_CONFIG = {
   navigationOptions: ({ navigation }) => ({
-    headerStyle: { backgroundColor: "#d6a603" },  
-    headerTitleStyle: { color: "#fff" },
-    headerTintColor: "#fff",
-    headerLeftContainerStyle: {
-      backgroundColor: '#ffbb00',
-      paddingLeft: 30
+    headerStyle: {
+        backgroundColor: "#d6a603"
     },
-    headerLeft: <Icon name="menu" size={24} 
-      color= 'white'
-      onPress={ () => navigation.toggleDrawer() } />
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name="menu" size={24}
+      iconStyle={{ color: 'white' }} 
+      onPress={ () => navigation.toggleDrawer() } />    
   })
 }
 
@@ -75,8 +90,26 @@ const MenuNavigator = createStackNavigator({
 })
 
 const LoginNavigator = createStackNavigator({
-  Login: { screen: Login }
-}, { ...HEADERS_CONFIG, initialRouteName: 'Login' })
+    Login: Login
+  }, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#d6a603"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    title: 'Login',
+    headerTintColor: "#fff",
+    headerLeft: <Icon name="menu" size={24}
+      iconStyle={{ color: 'white' }} 
+      onPress={ () => navigation.toggleDrawer() } />    
+  })
+});
+
+// const LoginNavigator = createStackNavigator({
+//   Login: { screen: Login }
+// }, { ...HEADERS_CONFIG, initialRouteName: 'Login', title: 'Login' })
 
 const HomeNavigator = createStackNavigator({
     Home: { screen: Home }

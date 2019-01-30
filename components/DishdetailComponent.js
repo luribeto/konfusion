@@ -141,7 +141,6 @@ function RenderDish(props) {
                 onPress={ props.toggleModal }
                 />
               <Icon
-                raised
                 reverse
                 name='share'
                 type='font-awesome'
