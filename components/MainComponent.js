@@ -4,7 +4,7 @@ import About from './AboutComponent'
 import Menu from './MenuComponent'
 import Contact from './ContactComponent'
 import Dishdetail from './DishdetailComponent'
-import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native'
+import { View, Platform, Text, ScrollView, Image, StyleSheet, NetInfo, ToastAndroid, Alert } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation'
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
@@ -270,6 +270,44 @@ class Main extends Component {
     this.props.fetchComments()
     this.props.fetchPromos()
     this.props.fetchLeaders()
+
+    NetInfo.getConnectionInfo()
+      .then((connectionInfo) => {
+        ToastAndroid.show('Initial Network Connectivity Type: '
+          + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType,
+          ToastAndroid.LONG)
+
+        console.log('Initial Network Connectivity Type: ', connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType)
+      });
+
+    NetInfo.addEventListener('connectionChange', this.handleConnectivityChange);
+  }
+
+  componentWillUnmount() {
+    NetInfo.removeEventListener('connectionChange', this.handleConnectivityChange);
+  }
+
+  handleConnectivityChange = (connectionInfo) => {
+    switch (connectionInfo.type) {
+      case 'none':
+        ToastAndroid.show('You are now offline!', ToastAndroid.LONG);
+        console.log('You are now offline!', ToastAndroid.LONG);
+        break;
+      case 'wifi':
+        ToastAndroid.show('You are now connected to WiFi!', ToastAndroid.LONG);
+        console.log('You are now connected to WiFi!');
+        break;
+      case 'cellular':
+        ToastAndroid.show('You are now connected to Cellular!', ToastAndroid.LONG);
+        console.log('You are now connected to Cellular!')
+        break;
+      case 'unknown':
+        ToastAndroid.show('You now have unknown connection!', ToastAndroid.LONG);
+        console.log('You now have unknown connection!')
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
