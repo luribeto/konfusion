@@ -152,6 +152,22 @@ class RegisterTab extends Component {
     }
   }
 
+  getImageFromGallery = async () => {
+    const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    if (cameraRollPermission.status === 'granted') {
+      let selectedImage = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [3, 4],
+      });
+
+      if (!selectedImage.cancelled) {
+          console.log(selectedImage);
+          this.processImage(selectedImage.uri);
+      }
+    }
+  }
+
   processImage = async (imageUri) => {
     let processedImage = await ImageManipulator.manipulate(
       imageUri, 
@@ -162,22 +178,6 @@ class RegisterTab extends Component {
     );
     console.log(processedImage);
     this.setState({imageUrl: processedImage.uri });
-  }
-
-  getImageFromGallery = async () => {
-    const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-
-    if (cameraRollPermission.status === 'granted') {
-      let result = await ImagePicker.launchImageLibraryAsync({
-          allowsEditing: true,
-          aspect: [3, 4],
-      });
-
-      if (!result.cancelled) {
-          console.log(result);
-          this.setState({imageUrl: result.uri });
-      }
-    }
   }
   
   static navigationOptions = {
