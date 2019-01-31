@@ -237,9 +237,9 @@ class RegisterTab extends Component {
 
     getImageFromCamera = async () => {
         const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
-        const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        // const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-        if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
+        if (cameraPermission.status === 'granted') {
             let capturedImage = await ImagePicker.launchCameraAsync({
                 allowsEditing: true,
                 aspect: [3, 4],
@@ -250,6 +250,22 @@ class RegisterTab extends Component {
             }
         }
 
+    }
+
+    getImageFromGallery = async () => {
+        const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+        if (cameraRollPermission.status === 'granted') {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [3, 4],
+            });
+
+            if (!result.cancelled) {
+                console.log(result);
+                this.setState({imageUrl: result.uri });
+            }
+        }
     }
     
     static navigationOptions = {
@@ -284,7 +300,12 @@ class RegisterTab extends Component {
                     <Button
                         title="Camera"
                         onPress={this.getImageFromCamera}
-                        buttonStyle={{ backgroundColor: '#d6a603', marginTop: 30}}
+                        buttonStyle={{ backgroundColor: '#d6a603'}}
+                        />
+                    <Button
+                        title="Gallery"
+                        onPress={this.getImageFromGallery}
+                        buttonStyle={{ backgroundColor: '#d6a603', marginLeft: 20}}
                         />
                 </View>
                 <Input
@@ -304,7 +325,7 @@ class RegisterTab extends Component {
                 <Input
                     placeholder="First Name"
                     leftIcon={{ type: 'font-awesome', name: 'user-o' }}
-                    onChangeText={(lastname) => this.setState({firstname})}
+                    onChangeText={(firstname) => this.setState({firstname})}
                     value={this.state.firstname}
                     containerStyle={styles.formInput}
                     />
@@ -355,19 +376,21 @@ class RegisterTab extends Component {
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        margin: 20,
+        margin: 20
     },
     imageContainer: {
-        flex: 1,
+        display: 'flex',
+        justifyContent: 'space-between',
         flexDirection: 'row',
-        marginRight: 20,
-        width: 80,
-        height: 100
+        alignItems: 'center',
+        padding: 20,
+        height: 100,
+        backgroundColor: '#d8d6d6',
+        borderRadius: 10
     },
     image: {
-      margin: 10,
       width: 80,
-      height: 100
+      height: 100,
     },
     formInput: {
         margin: 20
