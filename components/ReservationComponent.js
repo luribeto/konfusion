@@ -363,7 +363,7 @@ async presentLocalNotification(date) {
             <DatePicker
                 style={{flex: 2, marginRight: 20}}
                 date={this.state.date}
-                format='MMM DD YYYY'
+                format='MMM DD YYYY, h:mm a'
                 mode="datetime"
                 placeholder="date and Time"
                 minDate="2018-01-01"
