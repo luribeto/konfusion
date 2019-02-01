@@ -47,14 +47,14 @@ const mapDispatchToProps = dispatch => ({
 const HEADERS_CONFIG = {
   navigationOptions: ({ navigation }) => ({
     headerStyle: {
-        backgroundColor: "#d6a603"
+        backgroundColor: "#ffbb00"
     },
     headerTitleStyle: {
         color: "#fff"            
     },
     headerTintColor: "#fff",
     headerLeft: <Icon name="menu" size={24}
-      iconStyle={{ color: 'white' }} 
+      iconStyle={{ color: 'white', backgroundColor: '#ffbb00', marginLeft: 15 }} 
       onPress={ () => navigation.toggleDrawer() } />    
   })
 }
@@ -94,7 +94,7 @@ const LoginNavigator = createStackNavigator({
   }, {
   navigationOptions: ({ navigation }) => ({
     headerStyle: {
-        backgroundColor: "#d6a603"
+        backgroundColor: "#ffbb00"
     },
     headerTitleStyle: {
         color: "#fff"            
@@ -102,7 +102,7 @@ const LoginNavigator = createStackNavigator({
     title: 'Login',
     headerTintColor: "#fff",
     headerLeft: <Icon name="menu" size={24}
-      iconStyle={{ color: 'white' }} 
+      iconStyle={{ color: 'white', backgroundColor: '#ffbb00', marginLeft: 15 }} 
       onPress={ () => navigation.toggleDrawer() } />    
   })
 });
